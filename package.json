@@ -1,0 +1,24 @@
+{
+  "author": "Vladimir Grichina <vgrichina@gmail.com> (http://www.componentix.com)",
+  "name": "libxmljs-easy",
+  "description": "Work with libmxmljs DOM as with plain Javascript objects.",
+  "version": "0.0.1",
+  "homepage": "http://github.com/vgrichina/libxmljs-easy",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vgrichina/libxmljs-easy.git"
+  },
+  "engines": {
+    "node": "~0.6.9"
+  },
+  "dependencies": {
+    "libxmljs": "~0.5.3"
+  },
+  "devDependencies": {
+    "mocha": "~0.11.0"
+  },
+  "main": "./main",
+  "scripts": {
+    "test": "mocha test.js"
+  }
+}
