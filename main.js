@@ -17,16 +17,22 @@ function convertElement(elem) {
         return it;
     });
 
-    // Group child elements by names
-    converted.forEach(function(it) {
+    // Create properties that group child elements by names
+    var tagNames = {};
+    converted.forEach(function (it) {
+        console.log("it", it);
         if (it instanceof Array) {
             var name = it.$.name();
-            if (!converted[name]) {
-                converted[name] = [];
-            }
-            converted[name].push(it);
+            tagNames[name] = true;
         }
     });
+    for (var tag in tagNames) {
+        Object.defineProperty(converted, tag, {
+            get: (function(tag) {
+                     return converted.filter(function(it) { return it.$.name() == tag; });
+                 }).bind(null, tag)
+        });
+    }
 
     // Collect attributes
     elem.attrs().forEach(function(it) {
