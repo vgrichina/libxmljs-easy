@@ -39,7 +39,7 @@ which can optionally end with attribute name prefixed with "$".
 
 When index is ommited – the array of elements is matched.
 When attribute is accessed on such array, its value is concatenated string
-of attribtue values for each of elements in the array.
+of attribute values for each of elements in the array.
 
 There is also original DOM element available as "$" property
 of individual converted elements.
