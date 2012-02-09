@@ -45,3 +45,10 @@ There is also original DOM element available as "$" property
 of individual converted elements.
 
      assert.equal(xml.book.language[0].$.text(), "English");
+
+Further info
+------------
+
+* [Annotated source with docs](http://vgrichina.github.com/libxmljs-easy/docs/main.html),
+generated using [Docco](http://jashkenas.github.com/docco/)
+* [Unit tests](https://github.com/vgrichina/libxmljs-easy/blob/master/test.js)
