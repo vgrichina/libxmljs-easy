@@ -7,6 +7,62 @@ exports.parse = function(str) {
     return convertElement(xml.root());
 }
 
+function merge(dst, src) {
+    for (var key in src) {
+        dst[key] = src[key];
+    }
+}
+
+function addTagProperties(parent, tagNames, getter) {
+    for (var tag in tagNames) {
+        Object.defineProperty(parent, tag, {
+            get: getter.bind(parent, tag)
+        });
+    }
+}
+
+function addChildGetters(result) {
+    // Create properties for child tags
+    var allTags = {};
+    result.forEach(function(it) {
+        merge(allTags, it.$$tagNames);
+    });
+    addTagProperties(result, allTags, childTagGetter);
+
+    // Create properties for attributes of matched tags
+    var allAttrs = {};
+    result.forEach(function(it) {
+        it.$.attrs().forEach(function(attr) {
+            allAttrs[attr.name()] = (allAttrs[attr.name()] || "") + attr.value();
+        });
+    });
+    for (var key in allAttrs) {
+        Object.defineProperty(result, "$" + key, {
+            value: allAttrs[key]
+        });
+    }
+}
+
+function childTagGetter(tag) {
+    var result = [];
+    this.forEach(function(it) {
+        Array.prototype.push.apply(result, it[tag]);
+    });
+
+    addChildGetters(result);
+
+    return result;
+}
+
+function tagGetter(tag) {
+    // Filter matching tags
+    var result = this.filter(function(it) { return it.$.name() == tag; });
+
+    addChildGetters(result);
+
+    return result;
+}
+
 function convertElement(elem) {
     // Convert child elements recursively
     var converted = elem.childNodes().map(function(it) {
@@ -20,19 +76,12 @@ function convertElement(elem) {
     // Create properties that group child elements by names
     var tagNames = {};
     converted.forEach(function (it) {
-        console.log("it", it);
         if (it instanceof Array) {
             var name = it.$.name();
             tagNames[name] = true;
         }
     });
-    for (var tag in tagNames) {
-        Object.defineProperty(converted, tag, {
-            get: (function(tag) {
-                     return converted.filter(function(it) { return it.$.name() == tag; });
-                 }).bind(null, tag)
-        });
-    }
+    addTagProperties(converted, tagNames, tagGetter);
 
     // Collect attributes
     elem.attrs().forEach(function(it) {
@@ -40,7 +89,9 @@ function convertElement(elem) {
     });
 
     // Save DOM element object
-    converted.$ = elem;
+    Object.defineProperty(converted, "$", {value: elem});
+    Object.defineProperty(converted, "$$tagNames", {value: tagNames});
+
 
     return converted;
 }
