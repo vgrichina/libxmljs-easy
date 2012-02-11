@@ -10,12 +10,16 @@ describe("easy", function() {
 
     it("should parse XML into JS object", function() {
         var xml = easy.parse(sampleXml);
+        assert.ok(xml);
+        assert.ok(xml.book);
+        assert.equal(xml.book.length, 1);
         assert.equal(xml.book[0].$name, "Lord of the Rings");
         assert.equal(xml.book[0].author[0].$name, "J. R. R. Tolkien");
     });
 
     it("should save original DOM element in '$' property", function() {
         var xml = easy.parse(sampleXml);
+        assert.ok(xml.$);
         assert.equal(xml.book.language[0].$.text(), "English");
     });
 

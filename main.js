@@ -12,6 +12,8 @@
 
 var libxml = require("libxmljs");
 var util = require("util");
+var Proxy = require("node-proxy");
+var handlerMaker = require("./handler-maker");
 
 // Usage
 // -----
@@ -56,69 +58,34 @@ exports.parse = function(str) {
     return convertElement(xml.root());
 }
 
-// Merge enumerable properties from `src` object into `dst` object.
-// Note that `dst` is modified in-place.
-function merge(dst, src) {
-    for (var key in src) {
-        dst[key] = src[key];
+function enhanceResults(results) {
+    var handler = handlerMaker(results);
+
+    handler.get = function(target, name) {
+        if (typeof results[name] != "undefined") {
+            return results[name];
+        }
+
+        if (name[0] == "$") {
+            var attrName = name.slice(1);
+
+            return results.map(function(it) {
+                return it.$.attr(attrName) ? it.$.attr(attrName).value() : "";
+            }).join("");
+        }
+
+        return enhanceResults(
+            Array.prototype.concat.apply([],
+                results.map(function (result) {
+                    return result.filter(function(it) {
+                        return it.$.name() == name;
+                    });
+                })
+            )
+        );
     }
-}
 
-// Add properties to access tags with given names using given getter
-function addTagProperties(parent, tagNames, getter) {
-    for (var tag in tagNames) {
-        Object.defineProperty(parent, tag, {
-            get: getter.bind(parent, tag)
-        });
-    }
-}
-
-// Add shorthand properties to given array of converted nodes
-function addShorthandProperties(result) {
-    // Create properties for child tags
-    var allTags = {};
-    result.forEach(function(it) {
-        merge(allTags, it.$$tagNames);
-    });
-    addTagProperties(result, allTags, childTagGetter);
-
-    // Create properties for attributes of matched tags
-    var allAttrs = {};
-    result.forEach(function(it) {
-        it.$.attrs().forEach(function(attr) {
-            allAttrs[attr.name()] = (allAttrs[attr.name()] || "") + attr.value();
-        });
-    });
-    for (var key in allAttrs) {
-        Object.defineProperty(result, "$" + key, {
-            value: allAttrs[key]
-        });
-    }
-}
-
-// Get child elements with given tag of elements in `this` as array
-function childTagGetter(tag) {
-    // Collect child elements
-    var result = [];
-    this.forEach(function(it) {
-        Array.prototype.push.apply(result, it[tag]);
-    });
-
-    // Add shorthand properties for child elements / attributes
-    addShorthandProperties(result);
-
-    return result;
-}
-
-// Get elements with given tag from `this` as array
-function tagGetter(tag) {
-    // Filter matching tags
-    var result = this.filter(function(it) { return it.$.name() == tag; });
-
-    // Add shorthand properties for child elements / attributes
-    addShorthandProperties(result);
-
-    return result;
+    return Proxy.create(handler);
 }
 
 // Convert single DOM element into "easy" representation
@@ -132,25 +99,25 @@ function convertElement(elem) {
         return it;
     });
 
-    // Create properties that group child elements by names
-    var tagNames = {};
-    converted.forEach(function (it) {
-        if (it instanceof Array) {
-            var name = it.$.name();
-            tagNames[name] = true;
-        }
-    });
-    addTagProperties(converted, tagNames, tagGetter);
-
-    // Collect attributes
-    elem.attrs().forEach(function(it) {
-        converted["$" + it.name()] = it.value();
-    });
-
     // Save DOM element object
     Object.defineProperty(converted, "$", {value: elem});
-    Object.defineProperty(converted, "$$tagNames", {value: tagNames});
 
+    var handler = handlerMaker(converted);
+    handler.get = function(target, name) {
+        if (typeof converted[name] != "undefined") {
+            return converted[name];
+        }
 
-    return converted;
+        if (name[0] == "$") {
+            var attrName = name.slice(1);
+
+            return elem.attr(attrName) ? elem.attr(attrName).value() : "";
+        }
+
+        return enhanceResults(converted.filter(function(it) {
+            return it.$.name() == name;
+        }));
+    };
+
+    return Proxy.create(handler);
 }
