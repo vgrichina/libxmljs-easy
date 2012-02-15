@@ -98,17 +98,25 @@ function enhanceResults(results) {
     return createProxy(results,
         function(attrName) {
             return results.map(function(it) {
-                return it.$.attr(attrName) ? it.$.attr(attrName).value() : "";
+                return it["$" + attrName];
             }).join("");
         },
         function(name) {
             return Array.prototype.concat.apply([],
-                results.map(function (result) {
-                    return result.filter(function(it) {
-                        return it.$.name() == name;
-                    });
+                results.map(function(it) {
+                    return it[name];
                 })
             );
+        },
+        function(attrName, value) {
+            results.forEach(function(it) {
+                it["$" + attrName] = value;
+            });
+        },
+        function(name, value) {
+            results.forEach(function(it) {
+                it[name] = value;
+            });
         }
     );
 }
