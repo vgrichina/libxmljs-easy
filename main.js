@@ -102,7 +102,12 @@ function convertElement(elem) {
     // Save DOM element object
     Object.defineProperty(converted, "$", {value: elem});
 
+    // Create default handler for object proxy
     var handler = handlerMaker(converted);
+
+    // Getter for proxy properties
+    // For uknown properties returns child elements with
+    // given tag name or attribute values if name starts with "$"
     handler.get = function(target, name) {
         if (typeof converted[name] != "undefined") {
             return converted[name];
@@ -117,6 +122,44 @@ function convertElement(elem) {
         return enhanceResults(converted.filter(function(it) {
             return it.$.name() == name;
         }));
+    };
+
+    // Setter for proxy properties
+    handler.set = function(target, name, value) {
+        if (typeof converted[name] != "undefined") {
+            // Default forwarding
+            converted[name] = value;
+        } else if (name[0] == "$") {
+            // Set attribute
+            var attrName = name.slice(1);
+            elem.attr(attrName, value);
+        } else {
+            // Child elements
+            if (typeof value == "string") {
+                var matchingElements = target[name];
+                if (matchingElements.length > 0) {
+                    // Set text of existing elements
+                    matchingElements.forEach(function(it) {
+                        it.$.text(value);
+                    });
+                } else {
+                    // Create new element
+                    converted.push(convertElement(elem.node(name, value)));
+                }
+            } else {
+                // Remove old elements
+                for (var i = 0; i < converted.length;) {
+                    if (converted[i].$.name() == name) {
+                        converted[i].$.remove();
+                        converted.splice(i, 1);
+                    } else {
+                        i++;
+                    }
+                }
+
+                // TODO: Add new elements
+            }
+        }
     };
 
     return Proxy.create(handler);
