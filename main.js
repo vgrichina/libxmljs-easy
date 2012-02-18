@@ -68,6 +68,10 @@ function createProxy(converted, attrGetter, elemGetter, attrSetter, elemSetter) 
             return converted[name];
         }
 
+        if (name == "$") {
+            return undefined;
+        }
+
         if (name[0] == "$") {
             var attrName = name.slice(1);
             return attrGetter.call(target, attrName);
@@ -150,7 +154,7 @@ function convertElement(elem) {
         },
         function(name, value) {
             // Child elements
-            if (typeof value == "string") {
+            if (value != null && value.constructor == String) {
                 var matchingElements = this[name];
                 if (matchingElements.length > 0) {
                     // Set text of existing elements
@@ -172,7 +176,32 @@ function convertElement(elem) {
                     }
                 }
 
-                // TODO: Add new elements
+                if (value == null) {
+                    return;
+                }
+
+                function addChildElement(obj) {
+                    if (obj.$) {
+                        converted.$.addChild(obj.$);
+                        converted.push(convertElement(obj.$));
+                    } else {
+                        // Create new element
+                        var child = convertElement(elem.node(name));
+                        converted.push(child);
+                        // Create child elements
+                        Object.keys(obj).forEach(function(it) {
+                            child[it] = obj[it];
+                        });
+                    }
+                }
+
+                if (!value.$ && value.constructor == Array) {
+                    value.forEach(function(it) {
+                        addChildElement(it);
+                    });
+                } else {
+                    addChildElement(value);
+                }
             }
         }
     );
