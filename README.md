@@ -4,6 +4,8 @@ libxmljs-easy
 libxmljs-easy is a Node.js module which simplifies XML traversing,
 similar to [E4X](http://en.wikipedia.org/wiki/ECMAScript_for_XML).
 
+[![Build Status](https://secure.travis-ci.org/vgrichina/libxmljs-easy.png?branch=master)](http://travis-ci.org/vgrichina/libxmljs-easy)
+
 Installation
 ------------
 
