@@ -54,7 +54,7 @@ describe("easy", function() {
         assert.equal(xml.$.toString(),
             '<books><book name="Lord of the Rings">' +
                 '<author name="J. R. R. Tolkien"/>' +
-                '<language></language>' +
+                '<language/>' +
             '</book></books>');
     });
 
@@ -125,7 +125,7 @@ describe("easy", function() {
             assert.equal(xml.$.toString(),
                 '<books><book name="Lord of the Rings">' +
                     '<author name="J. R. R. Tolkien"/>' +
-                    '<language></language>' +
+                    '<language/>' +
                 '</book></books>');
         });
 
