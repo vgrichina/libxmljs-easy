@@ -58,6 +58,16 @@ describe("easy", function() {
             '</book></books>');
     });
 
+    it("should allow to replace element's text, including ampersands", function() {
+        var xml = easy.parse(sampleXml);
+        xml.book[0].language = "English & Elvish";
+        assert.equal(xml.$.toString(),
+            '<books><book name="Lord of the Rings">' +
+                '<author name="J. R. R. Tolkien"/>' +
+                '<language>English &amp; Elvish</language>' +
+            '</book></books>');
+    });
+
     it("should allow to create new elements with text", function() {
         var xml = easy.parse(sampleXml);
         xml.book[0].genre = "Fantasy";
@@ -66,6 +76,17 @@ describe("easy", function() {
                 '<author name="J. R. R. Tolkien"/>' +
                 '<language>English</language>' +
                 '<genre>Fantasy</genre>' +
+            '</book></books>');
+    });
+
+    it("should allow to create new elements with text, including ampersands", function() {
+        var xml = easy.parse(sampleXml);
+        xml.book[0].genre = "Fantasy & ...";
+        assert.equal(xml.$.toString(),
+            '<books><book name="Lord of the Rings">' +
+                '<author name="J. R. R. Tolkien"/>' +
+                '<language>English</language>' +
+                '<genre>Fantasy &amp; ...</genre>' +
             '</book></books>');
     });
 
