@@ -50,11 +50,11 @@ describe("easy", function() {
 
     it("should allow to replace element's text", function() {
         var xml = easy.parse(sampleXml);
-        xml.book[0].language = "";
+        xml.book[0].language = "replaced";
         assert.equal(xml.$.toString(),
             '<books><book name="Lord of the Rings">' +
                 '<author name="J. R. R. Tolkien"/>' +
-                '<language/>' +
+                '<language>replaced</language>' +
             '</book></books>');
     });
 
@@ -142,11 +142,11 @@ describe("easy", function() {
 
         it("should allow to replace element's text", function() {
             var xml = easy.parse(sampleXml);
-            xml.book.language = "";
+            xml.book.language = "replaced";
             assert.equal(xml.$.toString(),
                 '<books><book name="Lord of the Rings">' +
                     '<author name="J. R. R. Tolkien"/>' +
-                    '<language/>' +
+                    '<language>replaced</language>' +
                 '</book></books>');
         });
 
