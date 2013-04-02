@@ -12,7 +12,7 @@
     "node": "~0.6.9"
   },
   "dependencies": {
-    "libxmljs": "git://github.com/vgrichina/libxmljs.git",
+    "libxmljs": ">=0.7.x",
     "node-proxy": "~0.6.0"
   },
   "devDependencies": {
