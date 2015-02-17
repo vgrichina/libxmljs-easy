@@ -12,7 +12,6 @@
 
 var libxml = require("libxmljs");
 var util = require("util");
-var Proxy = require("node-proxy");
 var handlerMaker = require("./handler-maker");
 
 // Usage

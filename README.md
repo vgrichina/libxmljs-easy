@@ -14,6 +14,9 @@ Installation
 Usage
 -----
 
+Note that latest version requires Node.js 0.11.x or 0.12.x and `--harmony-proxies` option.
+0.1.x versions of this module used `node-proxy` module instead.
+
 Use module
 
      var easy = require("libxmljs-easy");
