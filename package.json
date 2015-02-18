@@ -15,7 +15,8 @@
     "libxmljs": "~0.13.0"
   },
   "devDependencies": {
-    "mocha": "~2.1.0"
+    "mocha": "~2.1.0",
+    "docco": "~0.7.0"
   },
   "main": "./main",
   "scripts": {
