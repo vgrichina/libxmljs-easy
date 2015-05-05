@@ -51,8 +51,8 @@ var handlerMaker = require("./handler-maker");
 //      assert.equal(xml.book.language[0].$.text(), "English");
 //
 //
-exports.parse = function(str) {
-    var xml = libxml.parseXmlString(str);
+exports.parse = function(str, options) {
+    var xml = libxml.parseXmlString(str, options);
 
     return convertElement(xml.root());
 }
