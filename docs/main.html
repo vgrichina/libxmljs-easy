@@ -1,167 +1,470 @@
-<!DOCTYPE html>  <html> <head>   <title>main.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               main.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <h1>libxmljs-easy</h1>
+<!DOCTYPE html>
 
-<p>libxmljs-easy is a Node.js module which simplifies XML traversing,
+<html>
+<head>
+  <title>libxmljs-easy</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1 id="libxmljs-easy">libxmljs-easy</h1>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>libxmljs-easy is a Node.js module which simplifies XML traversing,
 similar to <a href="http://en.wikipedia.org/wiki/ECMAScript_for_XML">E4X</a>.</p>
+<h2 id="installation">Installation</h2>
 
-<h2>Installation</h2>
-
-<pre><code> npm install libxmljs-easy
-</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">libxml</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;libxmljs&quot;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;util&quot;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">handlerMaker</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./handler-maker&quot;</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <h2>Usage</h2>
-
-<p>Use module</p>
-
-<pre><code> var easy = require("libxmljs-easy");
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <pre><code> npm install libxmljs-easy
 </code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> libxml = <span class="hljs-built_in">require</span>(<span class="hljs-string">"libxmljs"</span>);
+<span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">"util"</span>);
+<span class="hljs-keyword">var</span> handlerMaker = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./handler-maker"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h2 id="usage">Usage</h2>
 
-<p>Parse XML</p>
-
-<pre><code> var xml = easy.parse('&lt;books&gt;&lt;book name="Lord of the Rings"&gt;' +
-                         '&lt;author name="J. R. R. Tolkien" /&gt;' +
-                         '&lt;language&gt;English&lt;/language&gt;' +
-                      '&lt;/book&gt;&lt;/books&gt;');
-</code></pre>
-
-<p>Select elements from collections explicitly</p>
-
-<pre><code> assert.equal(xml.book[0].$name, "Lord of the Rings");
- assert.equal(xml.book[0].author[0].$name, "J. R. R. Tolkien");
-</code></pre>
-
-<p>Use shorthands (works well for case when there is single child element with given name)</p>
-
-<pre><code> assert.equal(xml.book.$name, "Lord of the Rings");
- assert.equal(xml.book.author.$name, "J. R. R. Tolkien");
-</code></pre>
-
-<p>Basically the idea is that you construct a path from tag names,
-which can optionally end with attribute name prefixed with "$".</p>
-
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Use module</p>
+<pre><code> <span class="hljs-keyword">var</span> easy = <span class="hljs-built_in">require</span>(<span class="hljs-string">"libxmljs-easy"</span>);
+</code></pre><p>Parse XML</p>
+<pre><code> <span class="hljs-keyword">var</span> xml = easy.parse(<span class="hljs-string">'&lt;books&gt;&lt;book name="Lord of the Rings"&gt;'</span> +
+                         <span class="hljs-string">'&lt;author name="J. R. R. Tolkien" /&gt;'</span> +
+                         <span class="hljs-string">'&lt;language&gt;English&lt;/language&gt;'</span> +
+                      <span class="hljs-string">'&lt;/book&gt;&lt;/books&gt;'</span>);
+</code></pre><p>Select elements from collections explicitly</p>
+<pre><code> assert.equal(xml.book[<span class="hljs-number">0</span>].$name, <span class="hljs-string">"Lord of the Rings"</span>);
+ assert.equal(xml.book[<span class="hljs-number">0</span>].author[<span class="hljs-number">0</span>].$name, <span class="hljs-string">"J. R. R. Tolkien"</span>);
+</code></pre><p>Use shorthands (works well for case when there is single child element with given name)</p>
+<pre><code> assert.equal(xml.book.$name, <span class="hljs-string">"Lord of the Rings"</span>);
+ assert.equal(xml.book.author.$name, <span class="hljs-string">"J. R. R. Tolkien"</span>);
+</code></pre><p>Basically the idea is that you construct a path from tag names,
+which can optionally end with attribute name prefixed with “$”.</p>
 <p>When index is ommited – the array of elements is matched.
 When attribute is accessed on such array, its value is concatenated string
 of attribute values for each of elements in the array.</p>
-
-<p>There is also original DOM element available as "$" property
+<p>There is also original DOM element available as “$” property
 of individual converted elements.</p>
+<pre><code> assert.equal(xml.book.language[<span class="hljs-number">0</span>].$.text(), <span class="hljs-string">"English"</span>);
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.parse = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str)</span> </span>{
+    <span class="hljs-keyword">var</span> xml = libxml.parseXmlString(str);
 
-<pre><code> assert.equal(xml.book.language[0].$.text(), "English");
-</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">parse</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">xml</span> <span class="o">=</span> <span class="nx">libxml</span><span class="p">.</span><span class="nx">parseXmlString</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+    <span class="hljs-keyword">return</span> convertElement(xml.root());
+}
 
-    <span class="k">return</span> <span class="nx">convertElement</span><span class="p">(</span><span class="nx">xml</span><span class="p">.</span><span class="nx">root</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createProxy</span><span class="hljs-params">(converted, attrGetter, elemGetter, attrSetter, elemSetter)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Create default handler for object proxy</p>
 
-<span class="kd">function</span> <span class="nx">createProxy</span><span class="p">(</span><span class="nx">converted</span><span class="p">,</span> <span class="nx">attrGetter</span><span class="p">,</span> <span class="nx">elemGetter</span><span class="p">,</span> <span class="nx">attrSetter</span><span class="p">,</span> <span class="nx">elemSetter</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Create default handler for object proxy</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span> <span class="nx">handlerMaker</span><span class="p">(</span><span class="nx">converted</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Getter for proxy properties</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">handler</span><span class="p">.</span><span class="nx">get</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">converted</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">converted</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
-        <span class="p">}</span>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> handler = handlerMaker(converted);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Getter for proxy properties</p>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">==</span> <span class="s2">&quot;$&quot;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
-        <span class="p">}</span>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    handler.get = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(target, name)</span> </span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> converted[name] != <span class="hljs-string">"undefined"</span>) {
+            <span class="hljs-keyword">return</span> converted[name];
+        }
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;$&quot;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">attrName</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-            <span class="k">return</span> <span class="nx">attrGetter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">attrName</span><span class="p">);</span>
-        <span class="p">}</span>
+        <span class="hljs-keyword">if</span> (name == <span class="hljs-string">"$"</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
+        }
 
-        <span class="k">return</span> <span class="nx">enhanceResults</span><span class="p">(</span><span class="nx">elemGetter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">name</span><span class="p">));</span>
-    <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Setter for proxy properties</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">handler</span><span class="p">.</span><span class="nx">set</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">converted</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Default forwarding</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="nx">converted</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;$&quot;</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>Set attribute</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="kd">var</span> <span class="nx">attrName</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-            <span class="nx">attrSetter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">attrName</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Child elements</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="nx">elemSetter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">};</span>
+        <span class="hljs-keyword">if</span> (name[<span class="hljs-number">0</span>] == <span class="hljs-string">"$"</span>) {
+            <span class="hljs-keyword">var</span> attrName = name.slice(<span class="hljs-number">1</span>);
+            <span class="hljs-keyword">return</span> attrGetter.call(target, attrName);
+        }
 
-    <span class="k">return</span> <span class="nx">Proxy</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">handler</span><span class="p">);</span>
-<span class="p">}</span>
+        <span class="hljs-keyword">return</span> enhanceResults(elemGetter.call(target, name));
+    };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Setter for proxy properties</p>
 
-<span class="kd">function</span> <span class="nx">enhanceResults</span><span class="p">(</span><span class="nx">results</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">createProxy</span><span class="p">(</span><span class="nx">results</span><span class="p">,</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">attrName</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">results</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">it</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">it</span><span class="p">[</span><span class="s2">&quot;$&quot;</span> <span class="o">+</span> <span class="nx">attrName</span><span class="p">];</span>
-            <span class="p">}).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
-        <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">concat</span><span class="p">.</span><span class="nx">apply</span><span class="p">([],</span>
-                <span class="nx">results</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">it</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">return</span> <span class="nx">it</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
-                <span class="p">})</span>
-            <span class="p">);</span>
-        <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">attrName</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">results</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">it</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">it</span><span class="p">[</span><span class="s2">&quot;$&quot;</span> <span class="o">+</span> <span class="nx">attrName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-            <span class="p">});</span>
-        <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">results</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">it</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">it</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-            <span class="p">});</span>
-        <span class="p">}</span>
-    <span class="p">);</span>
-<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Convert single DOM element into "easy" representation</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">convertElement</span><span class="p">(</span><span class="nx">elem</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Convert child elements recursively</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">converted</span> <span class="o">=</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">().</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">it</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">it</span> <span class="k">instanceof</span> <span class="nx">libxml</span><span class="p">.</span><span class="nx">Element</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">convertElement</span><span class="p">(</span><span class="nx">it</span><span class="p">);</span>
-        <span class="p">}</span>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    handler.set = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(target, name, value)</span> </span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> converted[name] != <span class="hljs-string">"undefined"</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Default forwarding</p>
 
-        <span class="k">return</span> <span class="nx">it</span><span class="p">;</span>
-    <span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Save DOM element object</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">converted</span><span class="p">,</span> <span class="s2">&quot;$&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">value</span><span class="o">:</span> <span class="nx">elem</span><span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>Create proxy with helper methods</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">return</span> <span class="nx">createProxy</span><span class="p">(</span><span class="nx">converted</span><span class="p">,</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">attrName</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">)</span> <span class="o">?</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">).</span><span class="nx">value</span><span class="p">()</span> <span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
-        <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">converted</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">it</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">it</span><span class="p">.</span><span class="nx">$</span><span class="p">.</span><span class="nx">name</span><span class="p">()</span> <span class="o">==</span> <span class="nx">name</span><span class="p">;</span>
-            <span class="p">});</span>
-        <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">attrName</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">elem</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-        <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>Child elements</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">==</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">matchingElements</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">matchingElements</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>Set text of existing elements</p>             </td>             <td class="code">               <div class="highlight"><pre>                    <span class="nx">matchingElements</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">it</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">it</span><span class="p">.</span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-                    <span class="p">});</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>Create new element</p>             </td>             <td class="code">               <div class="highlight"><pre>                    <span class="nx">converted</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">convertElement</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">node</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">)));</span>
-                <span class="p">}</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>Remove old elements</p>             </td>             <td class="code">               <div class="highlight"><pre>                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">converted</span><span class="p">.</span><span class="nx">length</span><span class="p">;)</span> <span class="p">{</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="nx">converted</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">$</span><span class="p">.</span><span class="nx">name</span><span class="p">()</span> <span class="o">==</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">converted</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">$</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
-                        <span class="nx">converted</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                        <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            converted[name] = value;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (name[<span class="hljs-number">0</span>] == <span class="hljs-string">"$"</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Set attribute</p>
 
-                <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">return</span><span class="p">;</span>
-                <span class="p">}</span>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> attrName = name.slice(<span class="hljs-number">1</span>);
+            attrSetter.call(target, attrName, value);
+        } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Child elements</p>
 
-                <span class="kd">function</span> <span class="nx">addChildElement</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">converted</span><span class="p">.</span><span class="nx">$</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">$</span><span class="p">);</span>
-                        <span class="nx">converted</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">convertElement</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">$</span><span class="p">));</span>
-                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>Create new element</p>             </td>             <td class="code">               <div class="highlight"><pre>                        <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">convertElement</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">node</span><span class="p">(</span><span class="nx">name</span><span class="p">));</span>
-                        <span class="nx">converted</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <p>Create child elements</p>             </td>             <td class="code">               <div class="highlight"><pre>                        <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">it</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="nx">child</span><span class="p">[</span><span class="nx">it</span><span class="p">]</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">it</span><span class="p">];</span>
-                        <span class="p">});</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            elemSetter.call(target, name, value);
+        }
+    };
 
-                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">.</span><span class="nx">$</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">==</span> <span class="nb">Array</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">value</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">it</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">addChildElement</span><span class="p">(</span><span class="nx">it</span><span class="p">);</span>
-                    <span class="p">});</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                    <span class="nx">addChildElement</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">);</span>
-<span class="p">}</span>
+    <span class="hljs-keyword">return</span> Proxy.create(handler);
+}
 
-</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">enhanceResults</span><span class="hljs-params">(results)</span> </span>{
+    <span class="hljs-keyword">return</span> createProxy(results,
+        <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(attrName)</span> </span>{
+            <span class="hljs-keyword">return</span> results.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(it)</span> </span>{
+                <span class="hljs-keyword">return</span> it[<span class="hljs-string">"$"</span> + attrName];
+            }).join(<span class="hljs-string">""</span>);
+        },
+        <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(name)</span> </span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.prototype.concat.apply([],
+                results.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(it)</span> </span>{
+                    <span class="hljs-keyword">return</span> it[name];
+                })
+            );
+        },
+        <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(attrName, value)</span> </span>{
+            results.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(it)</span> </span>{
+                it[<span class="hljs-string">"$"</span> + attrName] = value;
+            });
+        },
+        <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(name, value)</span> </span>{
+            results.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(it)</span> </span>{
+                it[name] = value;
+            });
+        }
+    );
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Convert single DOM element into “easy” representation</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">convertElement</span><span class="hljs-params">(elem)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Convert child elements recursively</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> converted = elem.childNodes().map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(it)</span> </span>{
+        <span class="hljs-keyword">if</span> (it <span class="hljs-keyword">instanceof</span> libxml.Element) {
+            <span class="hljs-keyword">return</span> convertElement(it);
+        }
+
+        <span class="hljs-keyword">return</span> it;
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Save DOM element object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-built_in">Object</span>.defineProperty(converted, <span class="hljs-string">"$"</span>, {value: elem});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Create proxy with helper methods</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> createProxy(converted,
+        <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(attrName)</span> </span>{
+            <span class="hljs-keyword">return</span> elem.attr(attrName) ? elem.attr(attrName).value() : <span class="hljs-string">""</span>;
+        },
+        <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(name)</span> </span>{
+            <span class="hljs-keyword">return</span> converted.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(it)</span> </span>{
+                <span class="hljs-keyword">return</span> it.$.name() == name;
+            });
+        },
+        <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(attrName, value)</span> </span>{
+            elem.attr(attrName, value);
+        },
+        <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(name, value)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Child elements</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (value != <span class="hljs-literal">null</span> &amp;&amp; value.constructor == <span class="hljs-built_in">String</span>) {
+                <span class="hljs-keyword">var</span> matchingElements = <span class="hljs-keyword">this</span>[name];
+                <span class="hljs-keyword">if</span> (matchingElements.length &gt; <span class="hljs-number">0</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Set text of existing elements</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    matchingElements.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(it)</span> </span>{
+                        it.$.text(value);
+                    });
+                } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Create new element</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                    converted.push(convertElement(elem.node(name, value)));
+                }
+            } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Remove old elements</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; converted.length;) {
+                    <span class="hljs-keyword">if</span> (converted[i].$.name() == name) {
+                        converted[i].$.remove();
+                        converted.splice(i, <span class="hljs-number">1</span>);
+                    } <span class="hljs-keyword">else</span> {
+                        i++;
+                    }
+                }
+
+                <span class="hljs-keyword">if</span> (value == <span class="hljs-literal">null</span>) {
+                    <span class="hljs-keyword">return</span>;
+                }
+
+                <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addChildElement</span><span class="hljs-params">(obj)</span> </span>{
+                    <span class="hljs-keyword">if</span> (obj.$) {
+                        converted.$.addChild(obj.$);
+                        converted.push(convertElement(obj.$));
+                    } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Create new element</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                        <span class="hljs-keyword">var</span> child = convertElement(elem.node(name));
+                        converted.push(child);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Create child elements</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                        <span class="hljs-built_in">Object</span>.keys(obj).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(it)</span> </span>{
+                            child[it] = obj[it];
+                        });
+                    }
+                }
+
+                <span class="hljs-keyword">if</span> (!value.$ &amp;&amp; value.constructor == <span class="hljs-built_in">Array</span>) {
+                    value.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(it)</span> </span>{
+                        addChildElement(it);
+                    });
+                } <span class="hljs-keyword">else</span> {
+                    addChildElement(value);
+                }
+            }
+        }
+    );
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
